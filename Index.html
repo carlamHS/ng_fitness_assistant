@@ -523,7 +523,7 @@
         }
 
         .mode-switch {
-          grid-template-columns: 1fr;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
         }
 
         .desktop-only {
@@ -576,6 +576,7 @@
 
       body.mobile-like .button-row {
         flex-direction: column;
+        align-items: flex-start;
       }
 
       body.mobile-like .toolbar-grid {
@@ -584,7 +585,7 @@
       }
 
       body.mobile-like .mode-switch {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
       body.mobile-like .desktop-only {
@@ -629,8 +630,16 @@
       body.mobile-like .input,
       body.mobile-like .btn,
       body.mobile-like .mode-btn {
-        font-size: 1.06rem;
-        min-height: 52px;
+        font-size: 1.16rem;
+        min-height: 56px;
+      }
+
+      body.mobile-like .button-row .btn {
+        width: auto;
+        min-width: 10.8rem;
+        max-width: min(90vw, 16rem);
+        padding-left: 18px;
+        padding-right: 18px;
       }
 
       body.mobile-like .stat .k {
@@ -638,10 +647,11 @@
       }
 
       body.mobile-like .stat .t,
+      body.mobile-like .mobile-item-title,
       body.mobile-like .mobile-item-meta,
       body.mobile-like th,
       body.mobile-like td {
-        font-size: 1rem;
+        font-size: 1.06rem;
       }
 
       body.mobile-like .pill {
@@ -1453,7 +1463,27 @@
         if (!isMobileLikeLayout_()) {
           return 1;
         }
-        return 1.4;
+        const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+        const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
+        const dpr = Number(window.devicePixelRatio || 1);
+        let scale = 1.5;
+
+        if (vw <= 430) {
+          scale += 0.05;
+        }
+        if (vw <= 390) {
+          scale += 0.05;
+        }
+        if (vw <= 360) {
+          scale += 0.03;
+        }
+        if (vh <= 780) {
+          scale += 0.02;
+        }
+        if (dpr >= 3) {
+          scale += 0.01;
+        }
+        return Math.min(1.6, Math.max(1.45, scale));
       }
 
       function applyThemeForProfile_(profileName) {
