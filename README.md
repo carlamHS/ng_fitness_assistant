@@ -57,8 +57,8 @@ Because Apps Script web apps cannot directly serve PNG icon files, host icon ass
    - `assets/icons/favicon-32.png`
    - `manifest.webmanifest`
 3. `Index.html` already points to:
-   - `https://carlamHS.github.io/ng_fitness_assistant/assets/icons/...`
-   - `https://carlamHS.github.io/ng_fitness_assistant/manifest.webmanifest`
+   - `https://carlamHS.github.io/fitness_assistant/assets/icons/...`
+   - `https://carlamHS.github.io/fitness_assistant/manifest.webmanifest`
 4. After re-deploying Apps Script, remove old Home Screen shortcut (if any), then add again.
 
 To regenerate icons later, run:
